@@ -6,7 +6,7 @@ class DB
 
     private $hostname = "localhost";
     private $username = "root";
-    private $password = "root";
+    private $password = "";
     private $db_name = "shoppy_db";
     public $conn = "";
 
