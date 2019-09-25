@@ -75,7 +75,7 @@ Lower Header Section
 <div class="row">
 	<div class="span4">
 	<h1>
-	<a class="logo" href="index.html"><span>Twitter Bootstrap ecommerce template</span> 
+	<a class="logo" href="index.php"><span>Twitter Bootstrap ecommerce template</span> 
 		<img src="assets/img/logo-bootstrap-shoping-cart.png" alt="bootstrap sexy shop">
 	</a>
 	</h1>
@@ -150,7 +150,7 @@ Navigation Bar Section
 			</ul>
 			<form action="./search.php" method="GET"
 			class="navbar-search pull-right">
-			  <input name="search_query" type="text" placeholder="Search" class="search-query span2">
+			  <input name="q" type="text" placeholder="Search" class="search-query span2">
 			</form>
 			<ul class="nav pull-right">
 			<li class="dropdown">
