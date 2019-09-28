@@ -76,7 +76,12 @@ Body Section
 		 </div>
 			</form>
 		</div>
+		<div class="pull-left">
 		<?php echo $search_value["category_title"]?>
+		</div>
+		<div class="pull-right">
+		<?php echo date("m/d/Y", strtotime($search_value["publish_date"])); ?>
+		</div>
 	</div>
 	
 	<hr class="soften">

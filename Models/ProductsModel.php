@@ -43,6 +43,7 @@ public function ProductSerach($keyword = "",$count)
     OR tbl_products.description LIKE '%$keyword%'
     OR tbl_product_catagories.title LIKE '%$keyword%'
     OR tbl_products.price LIKE '%$keyword%'
+    ORDER BY qnty DESC,publish_date ASC
     LIMIT ".$count;
     $result = $this->conn->query($sql);
     $result = $result->fetchAll();
@@ -63,23 +64,31 @@ public function ProductDetails($id = null)
     tbl_products.status,
     tbl_products.created_at,
     tbl_products.updated_at,
+		
     tbl_products.category_id,
     tbl_product_catagories.id,
     tbl_product_catagories.title as category_title,
-    tbl_product_catagories.status
+    tbl_product_catagories.status,
+		
+		tbl_product_gallery.pic_url,
+		tbl_product_gallery.product_id
+		
     FROM tbl_products
-    INNER JOIN tbl_product_catagories
+    RIGHT JOIN tbl_product_catagories
     ON tbl_products.category_id = tbl_product_catagories.id
+		
+		LEFT JOIN tbl_product_gallery
+		ON tbl_product_gallery.product_id = tbl_products.id
     WHERE tbl_products.status = 1 AND  tbl_product_catagories.status = 1 
     AND tbl_products.id = ".$id."
-    LIMIT 1";
+    LIMIT 5";
     $result = $this->conn->query($sql);
     $result = $result->fetchAll();
     return $result;
 }
 
 
-public function ProductRelated($cat_id,$title, $count)
+public function ProductRelated($cat_id, $count)
 {
     $sql= "SELECT tbl_products.id as product_id,
     tbl_products.title as product_title,
@@ -100,7 +109,7 @@ public function ProductRelated($cat_id,$title, $count)
     INNER JOIN tbl_product_catagories
     ON tbl_products.category_id = tbl_product_catagories.id
     WHERE tbl_products.status = 1 AND  tbl_product_catagories.status = 1 
-    AND tbl_products.title LIKE '%$title%' AND tbl_products.category_id = $cat_id
+    AND tbl_products.category_id = $cat_id
     LIMIT $count";
     $result = $this->conn->query($sql);
     $result = $result->fetchAll();

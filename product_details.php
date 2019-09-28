@@ -11,6 +11,7 @@ $result_product = $Product_OBJ->ProductDetails($_GET["product"]);
 
 
 
+
 ?>
 <!-- 
 Body Section 
@@ -22,22 +23,39 @@ Body Section
     <ul class="breadcrumb">
     <li><a href="index.html">Home</a> <span class="divider">/</span></li>
     <li><a href="products.html"><?php echo $result_product[0]["category_title"]; ?></a> <span class="divider">/</span></li>
-    <li class="active"><?php echo $result_product[0]["product_title"]; ?></li>
+	<li class="active"><?php echo $result_product[0]["product_title"];
+	echo $result_product[0]["product_title"]; ?></li>
     </ul>	
 	<div class="well well-small">
 	<div class="row-fluid">
 			<div class="span5">
 			<div id="myCarousel" class="carousel slide cntr">
                 <div class="carousel-inner">
-                  <div class="item active">
-                   <a href="#"> <img src="assets/img/a.jpg" alt="" style="width:100%"></a>
+
+				<?php for ($i= 0; $i< count($result_product); $i++)
+				{
+					if($i == 0)
+					{
+
+					?>
+
+					<div class="item active">
+                   <a href="#"> <img src="<?php echo $result_product[0]["main_pic_url"] ?>" alt="" style="width:100%"></a>
                   </div>
-                  <div class="item">
-                     <a href="#"> <img src="assets/img/b.jpg" alt="" style="width:100%"></a>
+
+				<?php
+					}
+					else
+					?>
+				<div class="item">
+                     <a href="#"> <img src="<?php echo $result_product[$i]["pic_url"] ?>" alt="" style="width:100%"></a>
                   </div>
-                  <div class="item">
-                    <a href="#"> <img src="assets/img/e.jpg" alt="" style="width:100%"></a>
-                  </div>
+					<?php	
+				}
+				?>
+
+
+                
                 </div>
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
                 <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
@@ -126,38 +144,41 @@ Body Section
 			<div class="tab-pane fade" id="profile">
 
 			<?php 
-$result_product_related = $Product_OBJ->ProductRelated(1,"33",5);
+$result_product_related = $Product_OBJ->ProductRelated($result_product[0]["category_id"],5);
 foreach ($result_product_related as $key => $value) {
 	
-}
-
-			?>
+?>
 			<div class="row-fluid">	  
 			<div class="span2">
-				<img src="assets/img/d.jpg" alt="">
+				<img src="<?php echo $value["main_pic_url"]; ?>" alt="">
 			</div>
 			<div class="span6">
 				<h5><?php echo $value["product_title"]; ?> </h5>
 				<p>
-				Nowadays the lingerie industry is one of the most successful business spheres.
-				We always stay in touch with the latest fashion tendencies - 
-				that is why our goods are so popular..
+				<?php echo  substr($value["description"],0,200); ?>
 				</pp>
 			</div>
 			<div class="span4 alignR">
 			<form class="form-horizontal qtyFrm">
-			<h3> $140.00</h3>
+			<h3> <?php echo $value["price"]; ?></h3>
 			<label class="checkbox">
 				<input type="checkbox">  Adds product to compair
 			</label><br>
 			<div class="btn-group">
 			  <a href="product_details.html" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
-			  <a href="product_details.html" class="shopBtn">VIEW</a>
+			  <a href="<?php echo $siteConfig[0]["site_url"]."product_details.php?product=".$value["product_id"]; ?>" class="shopBtn">VIEW</a>
 			 </div>
 				</form>
 			</div>
 		</div>
 			<hr class="soft">
+
+			<?php
+}
+
+?>
+
+
 
 			</div>
               <div class="tab-pane fade" id="cat1">
