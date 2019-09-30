@@ -53,6 +53,8 @@ for($i=0; $i< count($result_products); $i=$i+3)
 
 	
 		$counter++;
+	if ($counter < count($result_products))
+	{
 ?>
 					<li class="span4">
 						<div class="thumbnail">
@@ -74,7 +76,7 @@ for($i=0; $i< count($result_products); $i=$i+3)
 					</li>
 
 					<?php
-
+	}
 	
 }
 

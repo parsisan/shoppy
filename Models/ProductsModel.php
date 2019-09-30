@@ -87,7 +87,9 @@ public function getAllProducts($count , $cat_id = null)
     INNER JOIN tbl_product_catagories
     ON tbl_products.category_id = tbl_product_catagories.id
     WHERE tbl_products.status = 1 AND  tbl_product_catagories.status = 1
-    AND tbl_products.category_id = $cat_id";
+    AND tbl_products.category_id = $cat_id
+    ORDER BY tbl_products.publish_date ASC
+    LIMIT ".$count;
     }
 
     
