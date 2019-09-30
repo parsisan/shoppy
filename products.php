@@ -4,8 +4,17 @@ include_once("./Models/ProductsModel.php");
 
 $Products_OBJ = new ProductsModel;
 
-$result_products = $Products_OBJ->getAllProducts(7);
+if (empty($_GET))
+{
+$result_products = $Products_OBJ->getAllProducts(12);
+}
+else
+{
+	
 
+	$result_products = $Products_OBJ->getAllProducts(12,$_GET["cat_id"]);
+
+}
 ?>
 <!-- 
 Body Section 
@@ -40,21 +49,17 @@ for($i=0; $i< count($result_products); $i=$i+3)
 
 	for($j=1; $j <= 3; $j++)
 	{
-		if (count($result_products)%3 == 1 ||  count($result_products)%3 ==  2 )
-	{
-		break;
-	}
-	else{
+		
 
 	
 		$counter++;
 ?>
 					<li class="span4">
 						<div class="thumbnail">
-							<a href="product_details.html" class="overlay"></a>
-							<a class="zoomTool" href="product_details.html" title="add to cart"><span
+							<a href="product_details.php<?php echo "?product=".$result_products[$counter]["product_id"]; ?>" class="overlay"></a>
+							<a class="zoomTool" href="product_details.php<?php echo "?product=".$result_products[$counter]["product_id"]; ?>" title="add to cart"><span
 									class="icon-search"></span> QUICK VIEW</a>
-							<a href="product_details.html"><img src="<?php echo $result_products[$counter]["main_pic_url"];?>" alt=""></a>
+							<a href="product_details.php<?php echo "?product=".$result_products[$counter]["product_id"]; ?>"><img src="<?php echo $result_products[$counter]["main_pic_url"];?>" alt=""></a>
 							<div class="caption cntr">
 								<p><?php echo $result_products[$counter]["product_title"]; ?></p>
 								<p><strong> <?php echo number_format($result_products[$counter]["price"]); ?></strong></p>
@@ -70,7 +75,7 @@ for($i=0; $i< count($result_products); $i=$i+3)
 
 					<?php
 
-	}
+	
 }
 
 

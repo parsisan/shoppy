@@ -27,7 +27,7 @@ $Page_OBJ = new PagesModel();
 			foreach ($result_prd_cat as $key => $value) {
 			
 				?>
-		<li><a href="products.php?id=<?php echo $value[0];?>"><span class="icon-chevron-right"></span> <?php echo $value[1]; ?></a></li>
+		<li><a href="products.php?cat_id=<?php echo $value[0];?>"><span class="icon-chevron-right"></span> <?php echo $value[1]; ?></a></li>
 
 				<?php
 
