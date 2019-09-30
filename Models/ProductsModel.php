@@ -51,6 +51,30 @@ public function ProductSerach($keyword = "",$count)
 }
 
 
+
+
+public function getAllProducts($count)
+{
+
+    $sql= "SELECT tbl_products.id as product_id,
+    tbl_products.title as product_title,
+    tbl_products.publish_date,
+    tbl_products.price,
+    tbl_products.main_pic_url,
+    tbl_products.rate,
+    tbl_product_catagories.title as category_title
+    FROM tbl_products
+    INNER JOIN tbl_product_catagories
+    ON tbl_products.category_id = tbl_product_catagories.id
+    WHERE tbl_products.status = 1 AND  tbl_product_catagories.status = 1
+    ORDER BY tbl_products.id ASC
+    LIMIT ".$count;
+    $result = $this->conn->query($sql);
+    $result = $result->fetchAll();
+    return $result;
+}
+
+
 public function ProductDetails($id = null)
 {
     $sql= "SELECT tbl_products.id as product_id,
