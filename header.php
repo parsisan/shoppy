@@ -1,6 +1,7 @@
 <?php
 
 
+
 include_once("./Models/MainModel.php");
 
 $Main_OBJ = new MainModel;
@@ -9,6 +10,8 @@ $siteConfig = $Main_OBJ->getSiteConfig();
 
 include_once("./Models/PagesModel.php");
 $Page_OBJ = new PagesModel;
+
+
 
 //SESSSION JOBS
 
@@ -23,11 +26,13 @@ session_start();
 if(isset($_SESSION["isLogin"]))
 {
     $isUserLogin = true;
+    
 
 }
 else
 {
-	$isUserLogin = false;
+    $isUserLogin = false;
+   
 }
 
 //SESSION JOBS
@@ -44,7 +49,7 @@ if(isset($_POST['LoginSubmit']) )
 
    
 
-if (!empty($_POST["inputEmail"]) && !isset($_SESSION))
+if (!empty($_POST["inputEmail"]) )
 {
 
     $inputUsername = $_POST["inputEmail"];
@@ -67,9 +72,9 @@ if (!empty($_POST["inputEmail"]) && !isset($_SESSION))
 			$_SESSION["isLogin"] = true;
 			$_SESSION["FirstName"] = $result_UserLogin[0]["firstName"];
 			$_SESSION["LastName"] = $result_UserLogin[0]["lastName"];
+            $isUserLogin = true;
             
-            
-            echo "<br>SESSION STARTED";
+           
 
         }
         else
@@ -78,7 +83,7 @@ if (!empty($_POST["inputEmail"]) && !isset($_SESSION))
             $_SESSION["isLogin"] = false;
 			$_SESSION["FirstName"] = $result_UserLogin[0]["firstName"];
             $_SESSION["LastName"] = $result_UserLogin[0]["lastName"];
-            
+            $isUserLogin = false;
             header ("Location: ./login.php ");
 
         }
@@ -90,14 +95,16 @@ if (!empty($_POST["inputEmail"]) && !isset($_SESSION))
 }
 else if (isset($_POST['LogoutSubmit']))
 {
-
-	
+	$isUserLogin = false;
+session_destroy();
 
 }
+
 }
 
 
 // LOGIN
+
 ?>
 
 
@@ -146,8 +153,20 @@ else if (isset($_POST['LogoutSubmit']))
 
 				<a class="active" href="index.html"> <span class="icon-home"></span> Home</a>
 
-				<a href="#"><span class="icon-user"></span> My Account</a>
-				<?php if ($isUserLogin)
+				
+				<?php 
+
+ if ($isUserLogin && $_SESSION["isLogin"])
+{
+	?>
+	<a href="#"><span class="icon-user"></span> My Account 
+	<?php
+				echo "[ ".$_SESSION["FirstName"]." ]";
+}
+				?>
+				
+				</a>
+				<?php if ($isUserLogin && $_SESSION["isLogin"])
 				{
 
 				}
@@ -258,17 +277,15 @@ Navigation Bar Section
 
 							<?php 
 							
-							if ($isUserLogin)
+							if ($isUserLogin && $_SESSION["isLogin"])
 							{
 								?>
+<form class="form-horizontal loginFrm" method="POST" action="">
+<button type="submit" class="shopBtn btn-block" id="LogoutSubmit" name="LogoutSubmit">Logout</button>
 
-<form class="form-horizontal loginFrm" method="POST" action="">							
-<li class="">
-
-<button type="submit" class="dropdown icon-lock" id="LogoutSubmit" name="LogoutSubmit">Logout</button>
-</li>
 </form>
 								<?php
+								
 							}
 							else
 							{
