@@ -1,6 +1,12 @@
 <?php
 
 require_once("./header.php");
+
+if(isset($_SESSION["isLogin"]))
+{
+	header ("Location: ./index.php",true);
+
+}
 ?>
 <!-- 
 Body Section 

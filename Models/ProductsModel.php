@@ -165,6 +165,16 @@ public function ProductRelated($cat_id, $count)
 }
 
 
+// CONTROLLER IN MVC
+public function ProductAddToCard($id)
+{
+
+   
+
+
+}
+
+
 }
 
 

@@ -57,7 +57,7 @@ if (!empty($_POST["inputEmail"]) )
 	if (!empty($_POST["inputPassword"]))
 	{
 
-        $inputPassword = $_POST["inputPassword"];
+        $inputPassword = sha1($_POST["inputPassword"]);
 
         require_once("./Models/UsersModel.php");
 
@@ -84,7 +84,8 @@ if (!empty($_POST["inputEmail"]) )
 			$_SESSION["FirstName"] = $result_UserLogin[0]["firstName"];
             $_SESSION["LastName"] = $result_UserLogin[0]["lastName"];
             $isUserLogin = false;
-            header ("Location: ./login.php ");
+			header ("Location: ./login.php ");
+			die();
 
         }
 
@@ -151,7 +152,7 @@ session_destroy();
 					<a href="#"><span class="icon-tumblr"></span></a>
 				</div>
 
-				<a class="active" href="index.html"> <span class="icon-home"></span> Home</a>
+				<a class="active" href="index.php"> <span class="icon-home"></span> Home</a>
 
 				
 				<?php 
@@ -173,14 +174,14 @@ session_destroy();
 				else
 				{
 					?>
-				<a href="register.html"><span class="icon-edit"></span> Free Register </a>
+				<a href="register.php"><span class="icon-edit"></span> Free Register </a>
 
 					<?php
 				}
 
 				?>
-				<a href="contact.html"><span class="icon-envelope"></span> Contact us</a>
-				<a href="cart.html"><span class="icon-shopping-cart"></span> 2 Item(s) - <span
+				<a href="contact.php"><span class="icon-envelope"></span> Contact us</a>
+				<a href="cart.php"><span class="icon-shopping-cart"></span> 2 Item(s) - <span
 						class="badge badge-warning"> $448.42</span></a>
 			</div>
 		</div>

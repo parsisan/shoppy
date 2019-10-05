@@ -65,7 +65,10 @@ for($i=0; $i< count($result_products); $i=$i+3)
 							<div class="caption cntr">
 								<p><?php echo $result_products[$counter]["product_title"]; ?></p>
 								<p><strong> <?php echo number_format($result_products[$counter]["price"]); ?></strong></p>
-								<h4><a class="shopBtn" href="#" title="add to cart"> Add to cart </a></h4>
+
+								<h4>
+								<a class="shopBtn" href="./testCart.php?id=<?php echo $result_products[$counter]["product_id"]; ?>" title="add to cart"> Add to cart </a></h4>
+								
 								<div class="actionList">
 									<a class="pull-left" href="#">Add to Wish List </a>
 									<a class="pull-left" href="#"> Add to Compare </a>
